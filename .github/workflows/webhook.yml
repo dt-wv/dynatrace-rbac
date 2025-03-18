@@ -7,7 +7,7 @@ on:
   push:
     branches: [ "main" ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel 
 jobs:
   # This workflow contains a single job called "webhook"
   webhoook:
@@ -20,8 +20,8 @@ jobs:
       - id: env-setu
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET}}
-          CLIENT_URN: ${{secrets.CLIENT_URN}}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          CLIENT_URN: ${{secrets.CLIENT_URN }}
         run: |
           echo "bearer = '${curl --request POST \
           --url  https://sso.dynatrace.com/sso/oauth2/token \
@@ -29,7 +29,7 @@ jobs:
           --data-urlencode 'grant_type=client_credentials' \
           --data-urlencode 'client_id=$CLIENT_ID' \
           --data-urlencode 'client_secret=$CLIENT_SECRET' \
-          --data-urlencode 'resource=$CLIENT_URN' }'" >> "$GITHUB_OUTPUT"
+          --data-urlencode 'resource=$CLIENT_URN'" >> "$GITHUB_OUTPUT"
     
       - name: Run Dynatrace Workflow webhook
         run: |
