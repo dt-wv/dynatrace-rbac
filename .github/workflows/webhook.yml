@@ -17,9 +17,19 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:  
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - id: env-setup
+        run: |
+          bearer = `curl --request POST \
+          --url  https://sso.dynatrace.com/sso/oauth2/token
+          --header 'content-type application/x-www-form-urlencoded'
+          --data-urlencode 'grant_type=client_credentials' \
+          --data-urlencode 'client_id=${{secrets.CLIENT_ID}}' \
+          --data-urlencode 'client_secret=${{secrets.CLIENT_SECRET}}' \
+          --data-urlencode 'resource=$${{secrets.CLIENT_URN}}'` >> $GITHUB_OUTPUT
+    
+      - name: Run Dynatrace Workflow webhook
         run: |
           curl --request POST \
           --url https://ffb97160.apps.dynatrace.com/platform/automation/v1/workflows/d0c1eba7-b4e6-4135-a1c3-b55fa1f44bcd/run \
-          --header 'authorization: Bearer ${{ secrets.BEARER_TOKEN }}' \
+          --header 'authorization: Bearer ${{ steps.env-setup.outputs.bearer }}' \
           --header 'content-type: application/json'
