@@ -18,22 +18,14 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - id: env-setup
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          CLIENT_URN: ${{ secrets.CLIENT_URN }}
         run: |
           echo bearer=$(curl --request POST \
           --url https://sso.dynatrace.com/sso/oauth2/token \
           --header 'Content-Type: application/x-www-form-urlencoded' \
           -d 'grant_type=client_credentials&client_id=${{ secrets.CLIENT_ID }}&client_secret=${{ secrets.CLIENT_SECRET }}&resource=${{ secrets.CLIENT_URN }}' \
           | jq -r .access_token) >> $GITHUB_OUTPUT
-      
-      - run: echo ${{ steps.env-setup.outputs.bearer }}
         
       - name: Run Dynatrace Workflow webhook
-        env:
-          BEARER_TOKEN: ${{ steps.env-setup.outputs.bearer }}
         run: |
           curl --request POST \
           --url https://ffb97160.apps.dynatrace.com/platform/automation/v1/workflows/d0c1eba7-b4e6-4135-a1c3-b55fa1f44bcd/run \
