@@ -17,7 +17,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - id: env-setu
+      - id: env-setup
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -31,8 +31,7 @@ jobs:
           --data-urlencode 'client_secret=$CLIENT_SECRET' \
           --data-urlencode 'resource=$CLIENT_URN')'" >> "$GITHUB_OUTPUT"
       
-      - shell: bash
-        run: echo [${{ steps.env-setup.outputs.bearer }}]
+      - run: echo [${{ steps.env-setup.outputs.bearer }}]
       
       - shell: bash
         run: cat output.txt
