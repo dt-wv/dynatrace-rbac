@@ -26,10 +26,7 @@ jobs:
           echo "bearer='$(curl --request POST \
           --url  https://sso.dynatrace.com/sso/oauth2/token \
           --header 'Content-Type: application/x-www-form-urlencoded' \
-          --data-urlencode 'grant_type=client_credentials' \
-          --data-urlencode 'client_id=$CLIENT_ID' \
-          --data-urlencode 'client_secret=$CLIENT_SECRET' \
-          --data-urlencode 'resource=$CLIENT_URN')'" >> "$GITHUB_OUTPUT"
+          -d "grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&resource=$CLIENT_URN"')'" >> "$GITHUB_OUTPUT"
       
       - run: echo ${{ steps.env-setup.outputs.bearer }}
         
