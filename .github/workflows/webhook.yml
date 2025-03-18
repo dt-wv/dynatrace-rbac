@@ -31,8 +31,11 @@ jobs:
           --data-urlencode 'client_secret=$CLIENT_SECRET' \
           --data-urlencode 'resource=$CLIENT_URN')'" >> "$GITHUB_OUTPUT"
       
-      - run: echo ${{ steps.env-setup.outputs.bearer }} | tee output.txt
-      - run: cat output.txt
+      - shell: bash
+        run: echo ${{ steps.env-setup.outputs.bearer }} | tee output.txt
+      
+      - shell: bash
+        run: cat output.txt
         
       - name: Run Dynatrace Workflow webhook
         env:
