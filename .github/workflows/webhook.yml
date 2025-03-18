@@ -19,7 +19,7 @@ jobs:
       # Runs a single command using the runners shell
       - id: env-setup
         run: |
-          "bearer = `curl --request POST \
+          echo "bearer = `curl --request POST \
           --url  https://sso.dynatrace.com/sso/oauth2/token \
           --header 'content-type application/x-www-form-urlencoded' \
           --data-urlencode 'grant_type=client_credentials' \
