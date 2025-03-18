@@ -25,7 +25,7 @@ jobs:
           --data-urlencode 'grant_type=client_credentials' \
           --data-urlencode 'client_id=${{secrets.CLIENT_ID}}' \
           --data-urlencode 'client_secret=${{secrets.CLIENT_SECRET}}' \
-          --data-urlencode 'resource=$${{secrets.CLIENT_URN}}'}'" >> $GITHUB_OUTPUT
+          --data-urlencode 'resource=${{secrets.CLIENT_URN}}'}'" >> "$GITHUB_OUTPUT"
     
       - name: Run Dynatrace Workflow webhook
         run: |
