@@ -21,7 +21,7 @@ jobs:
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          CLIENT_URN: ${{secrets.CLIENT_URN }}
+          CLIENT_URN: ${{ secrets.CLIENT_URN }}
         run: |
           bearer='${curl --request POST \
           --url  https://sso.dynatrace.com/sso/oauth2/token \
