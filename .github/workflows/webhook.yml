@@ -20,8 +20,8 @@ jobs:
       - id: env-setup
         run: |
           bearer = `curl --request POST \
-          --url  https://sso.dynatrace.com/sso/oauth2/token
-          --header 'content-type application/x-www-form-urlencoded'
+          --url  https://sso.dynatrace.com/sso/oauth2/token \
+          --header 'content-type application/x-www-form-urlencoded' \
           --data-urlencode 'grant_type=client_credentials' \
           --data-urlencode 'client_id=${{secrets.CLIENT_ID}}' \
           --data-urlencode 'client_secret=${{secrets.CLIENT_SECRET}}' \
