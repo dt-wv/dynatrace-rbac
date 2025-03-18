@@ -32,8 +32,10 @@ jobs:
           --data-urlencode 'resource=$CLIENT_URN')'" >> "$GITHUB_OUTPUT"
     
       - name: Run Dynatrace Workflow webhook
+        env:
+          BEARER_TOKEN: ${{ steps.env-setup.outputs.bearer }}
         run: |
           curl --request POST \
           --url https://ffb97160.apps.dynatrace.com/platform/automation/v1/workflows/d0c1eba7-b4e6-4135-a1c3-b55fa1f44bcd/run \
-          --header 'authorization: Bearer ${{ steps.env-setup.outputs.bearer }}' \
+          --header 'authorization: Bearer $BEARER_TOKEN' \
           --header 'content-type: application/json'
