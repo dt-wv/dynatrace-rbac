@@ -13,10 +13,8 @@ jobs:
   webhoook:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Runs a single command using the runners shell
+      # Get the bearer token
       - id: env-setup
         run: |
           echo bearer=$(curl --request POST \
