@@ -32,7 +32,7 @@ jobs:
           --data-urlencode 'resource=$CLIENT_URN')'" >> "$GITHUB_OUTPUT"
       
       - shell: bash
-        run: echo ${{ steps.env-setup.outputs.bearer }} | tee output.txt
+        run: echo [${{ steps.env-setup.outputs.bearer }}]
       
       - shell: bash
         run: cat output.txt
