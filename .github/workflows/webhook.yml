@@ -26,7 +26,7 @@ jobs:
           curl --request POST \
           --url https://sso.dynatrace.com/sso/oauth2/token \
           --header 'Content-Type: application/x-www-form-urlencoded' \
-          -d 'grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&resource=$CLIENT_URN') \
+          -d 'grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&resource=$CLIENT_URN' \
           | jq -r .access_token" >> $GITHUB_OUTPUT
       
       - run: echo ${{ steps.env-setup.outputs.bearer }}
